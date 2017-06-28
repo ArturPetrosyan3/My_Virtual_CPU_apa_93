@@ -1,0 +1,17 @@
+#include "cpu.h"
+
+CPU::CPU()  {
+    ProgramCounter.setNum(0);
+    Register_0.setNum(0);
+    Register_1.setNum(0);
+    Memory(nullptr);
+}
+CPU::~CPU() {
+    Memory = nullptr;
+}
+
+void CPU::Reset() {
+    
+}
+
+
