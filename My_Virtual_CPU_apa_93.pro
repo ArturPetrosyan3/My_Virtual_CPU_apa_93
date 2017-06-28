@@ -27,12 +27,14 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     ram.cpp \
-    cpu.cpp
+    cpu.cpp \
+    programloader.cpp
 
 HEADERS += \
         mainwindow.h \
     ram.h \
-    cpu.h
+    cpu.h \
+    programloader.h
 
 FORMS += \
         mainwindow.ui

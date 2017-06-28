@@ -1,8 +1,9 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "ram.h"
-
+#include "cpu.h"
 #include <QDataStream>
+#include "programloader.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -10,22 +11,23 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    QByteArray baData;
-    QString str;
-
-
-    str = "4dgdfgdfgdfgdfgdsfgsdfg";
-
-    baData.insert(0, str.toLocal8Bit());
-    baData.resize(str.size());
-
-
-    qDebug() << baData;
-
     RAM *myRam = new RAM();
-    myRam->Write(2,baData);
+//    myRam->Write(2,QByteArray::number(5));
+//    myRam->Write(5,QByteArray::number(7));
+//    qDebug() << myRam->Read(3);
+//    qDebug() << myRam->Read(5);
 
-    qDebug() << myRam->Read(2);
+    CPU *MyCpu = new CPU(myRam);
+
+   // qDebug() << "run";
+    //MyCpu->Execute();
+    //qDebug() << "complite";
+    QString PathToInput = "C:\\Users\\Me\\Documents\\My_Virtual_CPU_apa_93\\sum.asm";//QDir::currentPath();
+    //PathToInput.append("/sum.asm");
+
+    ProgramLoader Prog(myRam, 2);
+
+    Prog.loadFile(PathToInput);
 
 }
 

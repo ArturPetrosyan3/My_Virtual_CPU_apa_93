@@ -19,5 +19,5 @@ const QByteArray RAM::Read (const int AddressInRam) {
 
 void RAM::Write(const int AddressInRam, const QByteArray& ValueInMemAddress) {
     MemorySpace[AddressInRam] = ValueInMemAddress;
-    qDebug() << MemorySpace[2];
+    qDebug() << MemorySpace[AddressInRam];
 }
