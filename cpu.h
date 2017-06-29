@@ -4,21 +4,19 @@
 #include <QQueue>
 #include <iostream>
 #include <bitset>
+#include <QMap>
 
 enum OP {
     HALT,
     LOAD0,
     LOAD1,
-    ADD,
-    BEEP,
-    PRINT,
-    STORE,
-    JMP,
-    JMP_EQ,
-    CLEAR0,
-    CLEAR1,
-    COPY0,
-    COPY1
+    LOAD2,
+    LOAD3,
+    LOAD4,
+    LOAD5,
+    LOAD6,
+    LOAD7,
+    ADD
 };
 
 class CPU
@@ -29,19 +27,36 @@ public:
     ~CPU();
 
     void Execute();
+    QByteArray Fetch();
+    void Decode(QByteArray &Code);
+    void Halt();
     void Reset();
 
-    enum {MOV, ADD, CLR, VAR};
+    void Load0();
+    void Load1();
+    void Load2();
+    void Load3();
+    void Load4();
+    void Load5();
+    void Load6();
+    void Load7();
+    void Add();
 
-    QMap<QString,QString> Decode(QQueue<QString> &Token);
-    QString GetBinFormatInt(const int Width, int Num);
-    int GetCommandEnum(QString CommandName);
+
 
 
 private:
     int ProgramCounter;
+    int Op_Address;
+    //QMap <QString, QByteArray> Registers;
     QByteArray Register_0;
     QByteArray Register_1;
+    QByteArray Register_2;
+    QByteArray Register_3;
+    QByteArray Register_4;
+    QByteArray Register_5;
+    QByteArray Register_6;
+    QByteArray Register_7;
     bool OverflowError;
     bool SignedFlag;
     bool Halted;

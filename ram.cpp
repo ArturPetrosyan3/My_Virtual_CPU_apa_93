@@ -1,7 +1,7 @@
 #include "ram.h"
 
 RAM::RAM()
-    : Size(256)
+    : Size(1024)
     , MemorySpace(new QByteArray[Size])
 {
     ClearRam();
@@ -19,5 +19,5 @@ const QByteArray RAM::Read (const int AddressInRam) {
 
 void RAM::Write(const int AddressInRam, const QByteArray& ValueInMemAddress) {
     MemorySpace[AddressInRam] = ValueInMemAddress;
-    qDebug() << MemorySpace[AddressInRam];
+    //qDebug() << MemorySpace[AddressInRam];
 }

@@ -7,6 +7,7 @@
 #include <QQueue>
 #include <QRegExp>
 
+
 class ProgramLoader
 {
 private:
@@ -18,6 +19,7 @@ public:
     ProgramLoader(RAM *mem, int Offset);
     void loadFile(QString path);
     QString TokenizeString( QQueue<QString> &Tokens, QString LineToParse);
+    int GetRegEnumNumber(QString RegisterName);
 
 private:
     void parse(QString code);

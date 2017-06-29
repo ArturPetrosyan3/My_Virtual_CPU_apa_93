@@ -39,79 +39,91 @@ QString ProgramLoader::TokenizeString( QQueue<QString> &Tokens, QString LineToPa
 
 void ProgramLoader::parse(QString Line)
 {
-
-
-//    if (Line.length() < 4)
-//    {
-//        load(stoi(Line.substr(0, line.find(';'))));
-//        return;
-//    }
     QQueue<QString> Tokens;
     QString Commands;
     QString OpName;
     QString FirstVariable;
+    QString SecondVariable;
     Commands = TokenizeString(Tokens, Line);
     OpName = Tokens.front();
     Tokens.pop_front();
-    FirstVariable = Tokens.front();
-
-    if (OpName == "HAL") {
-        load(HALT);
+    if (OpName != "HALT") {
+        FirstVariable = Tokens.front();
+        Tokens.pop_front();
+        SecondVariable = Tokens.front();
     }
-    else if (OpName == "LD0")
+
+
+    if (OpName == "HALT") {
+        load(HALT);
+
+    }
+    else if (OpName == "LOAD" && FirstVariable == "R0")
     {
         load(LOAD0);
-        load(FirstVariable.toInt());
+        //load(FirstVariable.toInt());
+        load(SecondVariable.toInt());
     }
-    else if (OpName == "LD1")
+    else if (OpName == "LOAD"  && FirstVariable == "R1")
     {
         load(LOAD1);
-        load(FirstVariable.toInt());
+        load(SecondVariable.toInt());
     }
+    else if (OpName == "LOAD"  && FirstVariable == "R2")
+    {
+        load(LOAD2);
+        load(SecondVariable.toInt());
+    }
+    else if (OpName == "LOAD"  && FirstVariable == "R3")
+    {
+        load(LOAD3);
+        load(SecondVariable.toInt());
+    }
+    else if (OpName == "LOAD"  && FirstVariable == "R4")
+    {
+        load(LOAD4);
+        load(SecondVariable.toInt());
+    }
+    else if (OpName == "LOAD"  && FirstVariable == "R5")
+    {
+        load(LOAD5);
+        load(SecondVariable.toInt());
+    }
+    else if (OpName == "LOAD"  && FirstVariable == "R6")
+    {
+        load(LOAD6);
+        load(SecondVariable.toInt());
+    }
+    else if (OpName == "LOAD"  && FirstVariable == "R7")
+    {
+        load(LOAD7);
+        load(SecondVariable.toInt());
+    }
+
     else if (OpName == "ADD")
     {
         load(ADD);
+        load(GetRegEnumNumber(FirstVariable));
+        load(GetRegEnumNumber(SecondVariable));
     }
-//    else if (Tokens.front() == "BEL")
-//    {
-//        load(BEEP);
-//    }
-//    else if (Tokens.front() == "PRT")
-//    {
-//        load(PRINT);
-//        load(stoi(addr));
-//    }
-//    else if (Tokens.front() == "STR")
-//    {
-//        load(STORE);
-//        load(stoi(addr));
-//    }
-//    else if (Tokens.front() == "JMP")
-//    {
-//        load(JMP);
-//        load(stoi(addr));
-//    }
-//    else if (Tokens.front() == "JPE")
-//    {
-//        load(JMP_EQ);
-//        load(stoi(addr));
-//    }
-//    else if (Tokens.front() == "CL0")
-//    {
-//        load(CLEAR0);
-//    }
-//    else if (Tokens.front() == "CL1")
-//    {
-//        load(CLEAR1);
-//    }
-//    else if (Tokens.front() == "CP0")
-//    {
-//        load(COPY0);
-//    }
-//    else if (Tokens.front() == "CP1")
-//    {
-//        load(COPY1);
-//    }
+}
+int ProgramLoader::GetRegEnumNumber(QString RegisterName) {
+    if (RegisterName == "R0")
+        return 1;
+    else if (RegisterName == "R1")
+        return 2;
+    else if (RegisterName == "R2")
+        return 3;
+    else if (RegisterName == "R3")
+        return 4;
+    else if (RegisterName == "R4")
+        return 5;
+    else if (RegisterName == "R5")
+        return 6;
+    else if (RegisterName == "R6")
+        return 7;
+    else if (RegisterName == "R7")
+        return 8;
 }
 
 

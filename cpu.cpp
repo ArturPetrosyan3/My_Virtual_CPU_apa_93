@@ -5,9 +5,9 @@ CPU::CPU(RAM *Memory)
     , SignedFlag(false)
     , Halted(false)
     , m_Memory(Memory)
-    , ProgramCounter(0)
+    , ProgramCounter(2)
+    , Op_Address(0)
 {
-    //SetVar(ProgramCounter);
     SetVar(Register_0);
     SetVar(Register_1);
 }
@@ -26,65 +26,113 @@ void CPU::Reset() {
 }
 
 
-
-void CPU::Execute() {
-    while(!Halted)  {
-
+void CPU::Execute()
+{
+    while (!Halted)
+    {
+        QByteArray FatchReturn = Fetch();
+        m_Memory->Write(Op_Address, FatchReturn);
+        QByteArray ReadOpCode = m_Memory->Read(Op_Address);
+        Decode(ReadOpCode);
     }
 }
 
-int CPU::GetCommandEnum(QString CommandName) {
-    if (CommandName == "mov")
-        return 0;
-    else if (CommandName == "add")
-        return 1;
-    else if (CommandName == "clr")
-        return 2;
-    else if (CommandName == "var")
-        return 3;
-    else
-        return -1;
+
+QByteArray CPU::Fetch()
+{
+    QByteArray b;
+    b = m_Memory->Read(ProgramCounter);
+    ProgramCounter += 1;
+    //qDebug() << b;
+    return b;
 }
 
-QMap<QString, QString> CPU::Decode(QQueue<QString> &Code) {
-    QTextStream ParsedToken;
-    QString InputVariable;
-    QString FirstVariable;
-    QString SecondVariable;
-    QMap <QString, QString> VariableMap;
+void CPU::Decode(QByteArray &Code) {
+    int CodeNumber = Code.toInt();
+    switch (CodeNumber)
+    {
+        case HALT:
+            Halt();
+            break;
 
-    switch (GetCommandEnum(Code.front())) {
-        case MOV:
-            Code.pop_front();
-            FirstVariable = Code.front();
-            Code.pop_front();
-            SecondVariable = Code.front();
+        case LOAD0:
+            Load0();
+            break;
 
-            //InputBinaryString = GetBinFormatInt(32,SecondVariable.toInt());
+        case LOAD1:
+            Load1();
+            break;
+        case LOAD2:
+            Load2();
+            break;
+        case LOAD3:
+            Load3();
+            break;
+        case LOAD4:
+            Load4();
+            break;
+        case LOAD5:
+            Load5();
+            break;
+        case LOAD6:
+            Load6();
+            break;
+        case LOAD7:
+            Load7();
             break;
         case ADD:
-            //to do
+            Add();
             break;
-        case CLR:
-            break;
-        case VAR:
-             Code.pop_front();
-             InputVariable = Code.front();
-             VariableMap.insert(InputVariable,GetBinFormatInt(32,0));
-
-            break;
-
-        default:
-        break;
     }
-    return VariableMap;
 }
 
-QString CPU::GetBinFormatInt(const int Width, int Num){
-    std::bitset<32> BitStr(Num);
-    std::string mystr=  BitStr.to_string();
-    QString str = QString::fromUtf8(mystr.c_str());
-    return str;
+void CPU::Halt() {
+    Halted = true;
 }
 
+void CPU::Load0() {
+    Register_0 = m_Memory->Read(ProgramCounter);
+    qDebug() << "reg0" << Register_0;
+    ProgramCounter++;
+}
+void CPU::Load1() {
+    Register_1 = m_Memory->Read(ProgramCounter);
+    qDebug() << "reg1" << Register_1;
+    ProgramCounter++;
+}
+void CPU::Load2() {
+    Register_2 = m_Memory->Read(ProgramCounter);
+    qDebug() << "reg2" << Register_2;
+    ProgramCounter++;
+}
+void CPU::Load3() {
+    Register_3 = m_Memory->Read(ProgramCounter);
+    ProgramCounter++;
+}
+
+void CPU::Load4() {
+    Register_4 = m_Memory->Read(ProgramCounter);
+    ProgramCounter++;
+}
+
+void CPU::Load5() {
+    Register_5 = m_Memory->Read(ProgramCounter);
+    ProgramCounter++;
+}
+
+
+void CPU::Load6() {
+    Register_7 = m_Memory->Read(ProgramCounter);
+    ProgramCounter++;
+}
+
+
+void CPU::Load7() {
+    Register_7 = m_Memory->Read(ProgramCounter);
+    ProgramCounter++;
+}
+void CPU::Add() {
+    //QByteArray FirstOperand;
+    //FirstOperand = m_Memory->Read(ProgramCounter);
+}
 

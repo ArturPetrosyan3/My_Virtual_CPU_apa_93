@@ -22,12 +22,15 @@ MainWindow::MainWindow(QWidget *parent) :
    // qDebug() << "run";
     //MyCpu->Execute();
     //qDebug() << "complite";
-    QString PathToInput = "C:\\Users\\Me\\Documents\\My_Virtual_CPU_apa_93\\sum.asm";//QDir::currentPath();
+    QString PathToInput = "C:\\Users\\Arturp.SYNOPSYS\\Documents\\My_Virtual_CPU_apa_93\\My_Virtual_CPU_apa_93\\sum.asm";//QDir::currentPath();
     //PathToInput.append("/sum.asm");
 
     ProgramLoader Prog(myRam, 2);
 
     Prog.loadFile(PathToInput);
+
+
+    MyCpu->Execute();
 
 }
 
