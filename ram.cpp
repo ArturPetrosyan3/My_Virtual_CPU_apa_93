@@ -18,13 +18,13 @@ void RAM::ClearRam() {
 const char* RAM::Read (const int AddressInRam) {
   // return m_MemorySpace[AddressInRam];
     //qDebug() <<
-    char *Data = m_MemorySpace.data();
+    //char Data = m_MemorySpace[AddressInRam];
 
-    return Data;
+    //return Data;
 }
 
-void RAM::Write(const int AddressInRam, const QString& ValueInMemAddress) {
-    m_MemorySpace.insert(AddressInRam, ValueInMemAddress);
+void RAM::Write(const int AddressInRam, const QByteArray& ValueInMemAddress) {
+    m_MemorySpace.insert(AddressInRam,ValueInMemAddress);
     //m_MemorySpace[AddressInRam] = ValueInMemAddress;
     //qDebug() << m_MemorySpace.at
 }

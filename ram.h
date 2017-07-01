@@ -24,11 +24,11 @@ public:
     void                            ClearRam();
     // Reads an item for the m_MemorySpace
     // it needs an index for the item.
-    const char*                Read(const int AddressInRam);
+    const char*                     Read(const int AddressInRam);
     // Writes into the index of the m_MemorySpace
     // it needs 2 arguments first is the index to write
     // the secins is the actual value.
-    void                            Write(const int AddressInRam, const QString& ValueInMemAddress);
+    void                            Write(const int AddressInRam, const QByteArray& ValueInMemAddress);
 
 private:
     int                             m_Size;         // The Size that the ram will be
