@@ -32,8 +32,8 @@ void CPU::Execute()
     {
         QByteArray FatchReturn = Fetch();
         m_Memory->Write(Op_Address, FatchReturn);
-        QByteArray ReadOpCode = m_Memory->Read(Op_Address);
-        Decode(ReadOpCode);
+        //QByteArray ReadOpCode = m_Memory->Read(Op_Address);
+        //Decode(ReadOpCode);
     }
 }
 
@@ -41,7 +41,7 @@ void CPU::Execute()
 QByteArray CPU::Fetch()
 {
     QByteArray b;
-    b = m_Memory->Read(ProgramCounter);
+    //b = m_Memory->Read(ProgramCounter);
     ProgramCounter += 1;
     //qDebug() << b;
     return b;
@@ -91,44 +91,44 @@ void CPU::Halt() {
 }
 
 void CPU::Load0() {
-    Register_0 = m_Memory->Read(ProgramCounter);
+    //Register_0 = m_Memory->Read(ProgramCounter);
     qDebug() << "reg0" << Register_0;
     ProgramCounter++;
 }
 void CPU::Load1() {
-    Register_1 = m_Memory->Read(ProgramCounter);
+    //Register_1 = m_Memory->Read(ProgramCounter);
     qDebug() << "reg1" << Register_1;
     ProgramCounter++;
 }
 void CPU::Load2() {
-    Register_2 = m_Memory->Read(ProgramCounter);
+    //Register_2 = m_Memory->Read(ProgramCounter);
     qDebug() << "reg2" << Register_2;
     ProgramCounter++;
 }
 void CPU::Load3() {
-    Register_3 = m_Memory->Read(ProgramCounter);
+    //Register_3 = m_Memory->Read(ProgramCounter);
     ProgramCounter++;
 }
 
 void CPU::Load4() {
-    Register_4 = m_Memory->Read(ProgramCounter);
+    //Register_4 = m_Memory->Read(ProgramCounter);
     ProgramCounter++;
 }
 
 void CPU::Load5() {
-    Register_5 = m_Memory->Read(ProgramCounter);
+    //Register_5 = m_Memory->Read(ProgramCounter);
     ProgramCounter++;
 }
 
 
 void CPU::Load6() {
-    Register_7 = m_Memory->Read(ProgramCounter);
+    //Register_7 = m_Memory->Read(ProgramCounter);
     ProgramCounter++;
 }
 
 
 void CPU::Load7() {
-    Register_7 = m_Memory->Read(ProgramCounter);
+    //Register_7 = m_Memory->Read(ProgramCounter);
     ProgramCounter++;
 }
 void CPU::Add() {
