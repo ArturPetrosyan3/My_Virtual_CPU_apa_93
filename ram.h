@@ -13,7 +13,7 @@ public:
     ~RAM();
 public:
     void ClearRam();
-    const QByteArray Read (const int AddressInRam);
+    const QByteArray Read(const int AddressInRam);
     void Write(const int AddressInRam, const QByteArray& ValueInMemAddress);
 
 private:
