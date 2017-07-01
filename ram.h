@@ -12,13 +12,13 @@ public:
     RAM();
     ~RAM();
 public:
-    void ClearRam();
-    const QByteArray Read(const int AddressInRam);
-    void Write(const int AddressInRam, const QByteArray& ValueInMemAddress);
+    void                ClearRam();
+    const QByteArray    Read(const int AddressInRam);
+    void                Write(const int AddressInRam, const QByteArray& ValueInMemAddress);
 
 private:
-    int Size;
-    QByteArray *MemorySpace;
+    int                             m_Size;
+    QByteArray                      m_MemorySpace;
 };
 
 #endif // RAM_H
