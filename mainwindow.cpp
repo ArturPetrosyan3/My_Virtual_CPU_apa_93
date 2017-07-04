@@ -13,8 +13,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     RAM *myRam = new RAM();
 
-    myRam->Write(1,QByteArray::number(535));
-    qDebug() << myRam->Read(1);
+    myRam->Write(0,QByteArray::number(535));
+
+    //qDebug() << myRam->Read(1);
 
 
 //    myRam->Write(2,QByteArray::number(5));
