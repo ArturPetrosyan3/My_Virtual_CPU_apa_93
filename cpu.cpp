@@ -31,7 +31,7 @@ void CPU::Execute()
     while (!Halted)
     {
         QByteArray FatchReturn = Fetch();
-        m_Memory->Write(Op_Address, FatchReturn);
+        //m_Memory->Write(Op_Address, FatchReturn);
         //QByteArray ReadOpCode = m_Memory->Read(Op_Address);
         //Decode(ReadOpCode);
     }

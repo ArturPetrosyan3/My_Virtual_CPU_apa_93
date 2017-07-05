@@ -130,6 +130,6 @@ int ProgramLoader::GetRegEnumNumber(QString RegisterName) {
 void ProgramLoader::load(int b)
 {
     //cout << b;
-    Memory->Write(AddressOffset + AddressCounter, QByteArray::number(b) );
+  //  Memory->Write(AddressOffset + AddressCounter, QByteArray::number(b) );
     AddressCounter++;
 }

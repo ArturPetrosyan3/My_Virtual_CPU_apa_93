@@ -29,14 +29,14 @@ SOURCES += \
     ram.cpp \
     cpu.cpp \
     programloader.cpp \
-    bytarray.cpp
+    computer.cpp
 
 HEADERS += \
         mainwindow.h \
     ram.h \
     cpu.h \
     programloader.h \
-    bytarray.h
+    computer.h
 
 FORMS += \
         mainwindow.ui
