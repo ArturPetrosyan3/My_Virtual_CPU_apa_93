@@ -32,58 +32,63 @@ const int RAM::Read(const int AddressInRam, int Integer) {
     QStringList IntegerValue;
     int index = AddressInRam;
     QString ValuesAsBinary;
-
+    int theValue=0;
     char ItemInMemory;
     while (index < Integer) {
         temp = m_MemorySpace[index];
+        if (temp.at(0) == 'A') {
+            temp.clear();
+            temp.append(QString::number(0).rightJustified(1, '0'));
+        } else {
+            QChar tmpNum = temp.at(0);
+            temp.clear();
+            temp.append(QString::number(tmpNum.unicode()).rightJustified(1, '0'));
+        }
         IntegerValue.append(temp);
         index++;
         temp.clear();
     }
-    for (int ValInByte=0; ValInByte < Integer; ++ValInByte) {
+    for (int ValInByte=Integer-1; ValInByte >= 0; --ValInByte) {
         QString ValueItem = IntegerValue.at(ValInByte);
-        int theValue = ValueItem.toInt();
-        for (int i = 0; i < 8; ++i) {
-            int To = theValue & (1 << i) ? 1 : 0;
-            temp.append(To);
-            ValuesAsBinary.append(QString::number(To).rightJustified(1, '0'));
-            temp.clear();
-        }
+        theValue =theValue+ ValueItem.toInt();
+
+//        for (int i = 0; i < 8; ++i) {
+//            int To = theValue & (1 << i) ? 1 : 0;
+//            temp.append(To);
+//            ValuesAsBinary.append(QString::number(To).rightJustified(1, '0'));
+//            temp.clear();
+//        }
     }
-    long double vv = ValuesAsBinary.toInt();
-    int aa = convertBinaryToDecimal(ValuesAsBinary.toInt());
-    return aa;
+    return theValue;
 }
 
 
 
 
 
-void RAM::Write(const int AddressInRam, const int& ValueInMemAddress) {
-    int arr[32];
-    QString arr1;
-    int count = 0;
-    int theValue = 7;
-   // BytArray aa;
-    int index=0;
-    int num=0;
-
+void RAM::Write(const int AddressInRam, const int ValueInMemAddress) {
+    QString EightBitNum;    // takes 8 bit from the value in memorry address.
+    int count = 0;          // The count that indicates that it reched to 8 it.
+    int theValue = 57;
+    int index=0;            // The address in memory whic is one byte.
+    int num=0;              // The number wich will be written in 1 byte.
+    unsigned char CurrentItem;
     for (int i = 31; i >= -1; --i) {
-        int To = theValue & (1 << i) ? 1 : 0;
-        //arr[i] = To;
+        int ABit = theValue & (1 << i) ? 1 : 0; // after shifiting makes a bit.
         if (count == 8) {
-            //
-            num = arr1.toInt();
+            num = EightBitNum.toInt();
 
-           unsigned char a = '7';
-           //aa.WriteInToMemory(a,index++);
-           m_MemorySpace[index++] = a;
+            if (convertBinaryToDecimal(num) == 0)
+                CurrentItem = 'A';
+            else
+                CurrentItem = convertBinaryToDecimal(num);
+            m_MemorySpace[index++] = CurrentItem;
             count = 0;
             ++i;
-            arr1.clear();
+            EightBitNum.clear();
             continue;
         } else {
-            arr1.append(QString::number(To).rightJustified(1, '0'));
+            EightBitNum.append(QString::number(ABit).rightJustified(1, '0'));
             count++;
         }
     }

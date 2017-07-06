@@ -28,7 +28,7 @@ public:
     // Writes into the index of the m_MemorySpace
     // it needs 2 arguments first is the index to write
     // the secins is the actual value.
-    void                            Write(const int AddressInRam, const int& ValueInMemAddress);
+    void                            Write(const int AddressInRam, const int ValueInMemAddress);
     void Print();
 
 private:
